@@ -13,26 +13,6 @@ public:
     Node* prev;
 };
 
-void InsertAtBeginning(Node*& head, int value) {
-
-
-    /*
-        1-Create a new node with the desired value.
-        2-Set the next pointer of the new node to the current head of the list.
-        3-Set the previous pointer of the current head to the new node.
-        4-Set the new node as the new head of the list.
-    */
-
-    Node* newNode = new Node();
-    newNode->value = value;
-    newNode->next = head;
-    newNode->prev = NULL;
-
-    if (head != NULL) {
-        head->prev = newNode;
-    }
-    head = newNode;
-}
 
 void PrintNodeDetails(Node* head)
 {
@@ -76,6 +56,60 @@ void PrintList(Node* head)
 
 }
 
+void InsertAtBeginning(Node*& head, int value) {
+
+
+    /*
+        1-Create a new node with the desired value.
+        2-Set the next pointer of the new node to the current head of the list.
+        3-Set the previous pointer of the current head to the new node.
+        4-Set the new node as the new head of the list.
+    */
+
+    Node* newNode = new Node();
+    newNode->value = value;
+    newNode->next = head;
+    newNode->prev = NULL;
+
+    if (head != NULL) {
+        head->prev = newNode;
+    }
+    head = newNode;
+}
+
+Node *Find (Node *head, int value) {
+    while (head != NULL)
+    {
+        if (head->value == value)
+        {
+            return head;
+        }
+        
+        head = head->next;
+        
+    }
+    
+    return NULL;
+}
+
+void InsertAfter(Node *&Current, int value) {
+    
+    Node *NewNode = new Node();
+    NewNode->value = value;
+
+    NewNode->next = Current->next;
+    NewNode->prev = Current;
+
+    if (Current->next != NULL)
+    {
+        Current->next->prev = NewNode;
+    }
+    
+
+    Current->next = NewNode;
+    
+}
+
 int main()
 {
     Node* head = NULL;
@@ -87,6 +121,14 @@ int main()
     InsertAtBeginning(head, 1);
 
     cout << "\nLinked List Contenet:\n";
+    // PrintList(head);
+
+    /// Insert after:
+    Node *N1 = Find(head, 1);
+    InsertAfter(N1, 100);
+
+
+    // Print
     PrintList(head);
     PrintListDetails(head);
     
