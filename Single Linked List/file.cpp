@@ -9,28 +9,35 @@ public:
     Node *Next;
 };
 
-int main()
+void PrintList(Node *head)
 {
-
-    Node *Node1 = new Node();
-    Node *Node2 = new Node();
-    Node *Node3 = new Node();
-
-    Node1->value = 1;
-    Node2->value = 2;
-    Node3->value = 3;
-
-    Node1->Next = Node2;
-    Node2->Next = Node3;
-    Node3->Next = NULL;
-
-    Node *head = Node1;
-
     while (head != NULL)
     {
         cout << head->value << endl;
         head = head->Next;
     }
+}
+
+void AddToBeginning(Node *&head, int value) {
+    Node *NewNode = new Node();
+
+    NewNode->value = value;
+    NewNode->Next = head;
+
+    head = NewNode;
+}
+
+int main()
+{
+
     
+    Node *head = NULL;
+    
+    AddToBeginning(head, 1);
+    AddToBeginning(head, 2);
+    AddToBeginning(head, 3);
+
+    PrintList(head);
+
     return 0;
 }
