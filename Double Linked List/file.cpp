@@ -156,11 +156,27 @@ void Delete(Node *&head, Node *&NodeToDelete)
     }
 
     delete NodeToDelete;
-    
-    
-    
-    
 }
+
+void DeleteFirstNode(Node *&head)
+{
+    Node *ToBeDeleted = new Node();
+
+    if (head->next == NULL)
+    {
+        head = NULL;
+        return;
+    }
+
+    if (head != NULL)
+    {
+        ToBeDeleted = head;
+        head = ToBeDeleted->next;
+        head->prev = NULL;
+        delete ToBeDeleted;
+    }
+}
+
 int main()
 {
     Node *head = NULL;
@@ -181,9 +197,12 @@ int main()
     // // Insert at end
     // InsertAtEnd(head, 400);
 
-    // Delete
-    Node *N1 = Find(head, 1);
-    Delete(head, N1);
+    // // Delete
+    // Node *N1 = Find(head, 1);
+    // Delete(head, N1);
+
+    // Delete First Node
+    DeleteFirstNode(head);
 
     // Print
     PrintList(head);
