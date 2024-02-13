@@ -27,6 +27,32 @@ void AddToBeginning(Node *&head, int value) {
     head = NewNode;
 }
 
+void AddToEnd(Node *&head, int value) {
+    Node *NewNode = new Node();
+
+    NewNode->value = value;
+    NewNode->next = NULL;
+
+    if (head == NULL)
+    {
+        head = NewNode;
+        return;
+    }
+    
+    Node *LastNode = head;
+
+    while (LastNode != NULL)
+    {
+        if (LastNode->next == NULL)
+        {
+            LastNode->next = NewNode;
+            break;
+        }
+        LastNode = LastNode->next;
+        
+    }
+}
+
 Node *Find (Node *head, int value) {
     while (head != NULL)
     {
@@ -55,14 +81,13 @@ int main()
 {
     // Create nodes for example:
     Node *head = NULL;
-    AddToBeginning(head, 1);
-    AddToBeginning(head, 2);
     AddToBeginning(head, 3);
+    AddToBeginning(head, 2);
+    AddToBeginning(head, 1);
 
-    // Insert After:
-    Node *N1 = Find(head, 2);
-
-    InsertAfter(N1, 500);
+    // Insert at end:
+    AddToEnd(head, 4);
+    AddToEnd(head, 5);
 
     // Print result
     PrintList(head);
