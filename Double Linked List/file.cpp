@@ -1,5 +1,5 @@
-//ProgrammingAdvices.com
-//Mohammed Abu-Hadhoud
+// ProgrammingAdvices.com
+// Mohammed Abu-Hadhoud
 
 #include <iostream>
 using namespace std;
@@ -9,12 +9,11 @@ class Node
 {
 public:
     int value;
-    Node* next;
-    Node* prev;
+    Node *next;
+    Node *prev;
 };
 
-
-void PrintNodeDetails(Node* head)
+void PrintNodeDetails(Node *head)
 {
 
     if (head->prev != NULL)
@@ -28,36 +27,35 @@ void PrintNodeDetails(Node* head)
         cout << head->next->value << "\n";
     else
         cout << "NULL";
-
 }
 
 // Print the linked list
-void PrintListDetails(Node* head)
+void PrintListDetails(Node *head)
 
 {
     cout << "\n\n";
-    while (head != NULL) {
+    while (head != NULL)
+    {
         PrintNodeDetails(head);
         head = head->next;
     }
 }
 
-
 // Print the linked list
-void PrintList(Node* head)
+void PrintList(Node *head)
 
 {
     cout << "NULL <--> ";
-    while (head != NULL) {
+    while (head != NULL)
+    {
         cout << head->value << " <--> ";
         head = head->next;
     }
     cout << "NULL";
-
 }
 
-void InsertAtBeginning(Node*& head, int value) {
-
+void InsertAtBeginning(Node *&head, int value)
+{
 
     /*
         1-Create a new node with the desired value.
@@ -66,34 +64,36 @@ void InsertAtBeginning(Node*& head, int value) {
         4-Set the new node as the new head of the list.
     */
 
-    Node* newNode = new Node();
+    Node *newNode = new Node();
     newNode->value = value;
     newNode->next = head;
     newNode->prev = NULL;
 
-    if (head != NULL) {
+    if (head != NULL)
+    {
         head->prev = newNode;
     }
     head = newNode;
 }
 
-Node *Find (Node *head, int value) {
+Node *Find(Node *head, int value)
+{
     while (head != NULL)
     {
         if (head->value == value)
         {
             return head;
         }
-        
+
         head = head->next;
-        
     }
-    
+
     return NULL;
 }
 
-void InsertAfter(Node *&Current, int value) {
-    
+void InsertAfter(Node *&Current, int value)
+{
+
     Node *NewNode = new Node();
     NewNode->value = value;
 
@@ -104,13 +104,12 @@ void InsertAfter(Node *&Current, int value) {
     {
         Current->next->prev = NewNode;
     }
-    
 
     Current->next = NewNode;
-    
 }
 
-void InsertAtEnd(Node *&head, int value) {
+void InsertAtEnd(Node *&head, int value)
+{
     Node *NewNode = new Node();
     NewNode->value = value;
 
@@ -132,13 +131,39 @@ void InsertAtEnd(Node *&head, int value) {
         }
         Current = Current->next;
     }
+}
+
+void Delete(Node *&head, Node *&NodeToDelete)
+{
+    if (head == NULL || NodeToDelete == NULL)
+    {
+        return;
+    }
+
+    if (head == NodeToDelete)
+    {
+        head = NodeToDelete->next;
+    }
+
+    if (NodeToDelete->next != NULL)
+    {
+        NodeToDelete->next->prev = NodeToDelete->prev;
+    }
+
+    if (NodeToDelete->prev != NULL)
+    {
+        NodeToDelete->prev->next = NodeToDelete->next;
+    }
+
+    delete NodeToDelete;
+    
+    
     
     
 }
-
 int main()
 {
-    Node* head = NULL;
+    Node *head = NULL;
 
     InsertAtBeginning(head, 5);
     InsertAtBeginning(head, 4);
@@ -153,13 +178,16 @@ int main()
     // Node *N1 = Find(head, 1);
     // InsertAfter(N1, 100);
 
-    // Insert at end
-    InsertAtEnd(head, 400);
+    // // Insert at end
+    // InsertAtEnd(head, 400);
+
+    // Delete
+    Node *N1 = Find(head, 1);
+    Delete(head, N1);
 
     // Print
     PrintList(head);
     PrintListDetails(head);
-    
-    return 0;
 
+    return 0;
 }
