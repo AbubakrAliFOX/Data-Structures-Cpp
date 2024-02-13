@@ -110,6 +110,32 @@ void InsertAfter(Node *&Current, int value) {
     
 }
 
+void InsertAtEnd(Node *&head, int value) {
+    Node *NewNode = new Node();
+    NewNode->value = value;
+
+    if (head == NULL)
+    {
+        head = NewNode;
+        return;
+    }
+
+    Node *Current = head;
+    while (Current != NULL)
+    {
+        if (Current->next == NULL)
+        {
+            Current->next = NewNode;
+            NewNode->prev = Current;
+            NewNode->next = NULL;
+            return;
+        }
+        Current = Current->next;
+    }
+    
+    
+}
+
 int main()
 {
     Node* head = NULL;
@@ -123,10 +149,12 @@ int main()
     cout << "\nLinked List Contenet:\n";
     // PrintList(head);
 
-    /// Insert after:
-    Node *N1 = Find(head, 1);
-    InsertAfter(N1, 100);
+    // /// Insert after:
+    // Node *N1 = Find(head, 1);
+    // InsertAfter(N1, 100);
 
+    // Insert at end
+    InsertAtEnd(head, 400);
 
     // Print
     PrintList(head);
