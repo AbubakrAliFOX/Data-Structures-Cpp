@@ -177,6 +177,31 @@ void DeleteFirstNode(Node *&head)
     }
 }
 
+void DeleteLastNode(Node *&head)
+{
+    Node *Current = head;
+
+    if (Current->next == NULL)
+    {
+        head = NULL;
+        delete Current;
+        return;
+    }
+
+    while (Current != NULL)
+    {
+        if (Current->next == NULL)
+        {
+            Current->prev->next = NULL;
+            Current = NULL;
+            delete Current;
+            return;
+        }
+
+        Current = Current->next;
+    }
+}
+
 int main()
 {
     Node *head = NULL;
@@ -201,8 +226,11 @@ int main()
     // Node *N1 = Find(head, 1);
     // Delete(head, N1);
 
-    // Delete First Node
-    DeleteFirstNode(head);
+    // // Delete First Node
+    // DeleteFirstNode(head);
+
+    // Delete Last Node
+    DeleteLastNode(head);
 
     // Print
     PrintList(head);
